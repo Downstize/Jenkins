@@ -3,7 +3,7 @@ version: '3.8'
 services:
   jenkins-server:
     image: jenkins/jenkins:lts-jdk17
-    container_name: ${JENKINS_SERVER_NAME:-jenkins-server1}
+    container_name: ${JENKINS_SERVER_NAME:-jenkins-server}
     ports:
       - "8080:8080"
       - "50000:50000"  # Фиксированный порт для агента
@@ -16,7 +16,7 @@ services:
 
   jenkins-agent:
     build: .
-    container_name: ${JENKINS_AGENT_NAME:-jenkins-agent1}
+    container_name: ${JENKINS_AGENT_NAME:-jenkins-agent}
     user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
