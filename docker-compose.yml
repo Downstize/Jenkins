@@ -5,8 +5,8 @@ services:
     image: jenkins/jenkins:lts-jdk17
     container_name: ${JENKINS_SERVER_NAME:-jenkins-server}
     ports:
-      - "${JENKINS_SERVER_PORT:-8001}:8080"
-      - "${JENKINS_SLAVE_PORT:-50001}:50000"
+      - "8081:8080"  # Внешний порт 8081 перенаправлен на внутренний 8080
+      - "50001:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
@@ -22,7 +22,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/JenkinsLogs:/var/jenkins_agent
     environment:
-      - JENKINS_URL=http://jenkins-server:8080
+      - JENKINS_URL=http://jenkins-server:8080  # Используем внутренний порт Jenkins
       - JENKINS_SECRET=d52a15f2332a89e37e0188a34ce23644269a237cc8f8bae9b9dca216af3f4da4
       - JENKINS_AGENT_NAME=GuestAgent
     networks:
