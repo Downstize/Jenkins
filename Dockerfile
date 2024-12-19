@@ -6,17 +6,19 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
-    software-properties-common
+    software-properties-common \
+    openjdk-17-jdk \
+    && apt-get clean
 
-# Установить Docker CLI
 RUN curl -fsSL https://get.docker.com | sh
 
-# Добавить Jenkins URL и Agent Secret как переменные среды
 ENV JENKINS_URL=http://jenkins-server:8080
 ENV JENKINS_SECRET=6bcd022d165755b7774540f4ddd5f0d2899b283dadb24681c0591b545ac6d128
 ENV JENKINS_AGENT_NAME=GuestAgent2
 
-# Проверить установку Docker
 RUN docker --version
 
-USER jenkins
+COPY target/Jenkins-0.0.1-SNAPSHOT.jar /app.jar
+
+CMD java -jar /usr/share/jenkins/agent.jar -secret $JENKINS_SECRET -name $JENKINS_AGENT_NAME -url $JENKINS_URL & \
+    java -jar /app.jar
