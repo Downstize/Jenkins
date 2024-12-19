@@ -6,11 +6,17 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
-    software-properties-common \
-    && curl -fsSL https://get.docker.com | sh \
-    && curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep tag_name | cut -d '\"' -f4)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose
+    software-properties-common
 
-RUN docker --version && docker-compose --version
+# Установить Docker CLI
+RUN curl -fsSL https://get.docker.com | sh
+
+# Добавить Jenkins URL и Agent Secret как переменные среды
+ENV JENKINS_URL=http://jenkins-server:8080
+ENV JENKINS_SECRET=d52a15f2332a89e37e0188a34ce23644269a237cc8f8bae9b9dca216af3f4da4
+ENV JENKINS_AGENT_NAME=GuestAgent
+
+# Проверить установку Docker
+RUN docker --version
 
 USER jenkins
