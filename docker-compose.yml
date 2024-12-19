@@ -5,7 +5,7 @@ services:
     image: jenkins/jenkins:lts-jdk17
     container_name: jenkins-server
     ports:
-      - "8000:8000"
+      - "8000:8080"
       - "50000:50000"
     environment:
       - JENKINS_OPTS=--httpPort=8000
