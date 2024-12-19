@@ -11,7 +11,7 @@ public class HelloWorldController {
 
     @GetMapping("/")
     public String sayHello() {
-        String message = "Hello, World! My name is Slava and I'm turtle";
+        String message = "Hello, World! It's my second time when i'm introduce myself. My name is Slava and i'm turtle!";
         logger.info("Method sayHello was called. Message: {}", message);
         return message;
     }
