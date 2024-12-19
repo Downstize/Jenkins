@@ -1,5 +1,6 @@
 package org.example.jenkins;
 
+import org.example.jenkins.Controller.HelloWorldController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JenkinsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JenkinsApplication.class, args);
-    }
+        var context = SpringApplication.run(JenkinsApplication.class, args);
 
+        HelloWorldController helloWorldController = context.getBean(HelloWorldController.class);
+        String message = helloWorldController.sayHello();
+        System.out.println("HelloWorldController output: " + message);
+    }
 }
