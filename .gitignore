@@ -1,10 +1,37 @@
+# Общие исключения для всех проектов
 HELP.md
+.vscode/
+
+# Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+# Исключение для артефактов сборки
+!target/*.jar
+
+# Исключение для файлов внутри определённых директорий
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Исключение для билдов в определённых местах
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# STS (Spring Tool Suite)
 .apt_generated
 .classpath
 .factorypath
@@ -12,22 +39,3 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
