@@ -20,5 +20,9 @@ RUN docker --version
 
 COPY target/Jenkins-0.0.1-SNAPSHOT.jar /app.jar
 
-CMD java -jar /usr/share/jenkins/agent.jar -secret $JENKINS_SECRET -name $JENKINS_AGENT_NAME -url $JENKINS_URL & \
-    java -jar /app.jar
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+USER jenkins
+
+ENTRYPOINT ["/entrypoint.sh"]
